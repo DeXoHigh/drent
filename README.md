@@ -1,5 +1,5 @@
 ## VRP - DRENT
-- Preview: <div style="width:100%;height:0px;position:relative;padding-bottom:62.500%;"><iframe src="https://streamable.com/e/kr8ne9" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>
+- Preview: https://streamable.com/kr8ne9
 - More scripts soon...
 
 ## General info
