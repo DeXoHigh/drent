@@ -1,5 +1,5 @@
 ## VRP - DRENT
-- Preview: https://streamable.com/kr8ne9
+- Preview: [![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://streamable.com/kr8ne9)
 - More scripts soon...
 
 ## General info
