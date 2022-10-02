@@ -1,3 +1,11 @@
+-- 
+--   ____      __  __      _____     ___   _ 
+--   |  _ \  ___\ \/ /___  / _ \ \   / / | | |
+--   | | | |/ _ \\  // _ \| | | \ \ / /| |_| |
+--   | |_| |  __//  \ (_) | |_| |\ V / |  _  |
+--   |____/ \___/_/\_\___(_)___/  \_/  |_| |_|
+--                                            
+--  
 local Tunnel = module("vrp", "lib/Tunnel")
 local Proxy = module("vrp", "lib/Proxy")
 vRP = Proxy.getInterface("vRP")
@@ -16,15 +24,21 @@ AddEventHandler('drent:cumparadexo', function(amount, dexoveh)
 
 	function adabaniludexo(price, vehic)
 		vRP.setMoney({user_id, userBalance - amount})
-		vRPclient.notify(source,{string.format("Succes: Ai primit masina %s. Pentru %s$. Acum ai balanta egala cu %s$!",vehic,amount,formatMoney(userBalance))})
+		vRPclient.notify(source,{string.format("Succes: Ai inchiriat masina <span style='color:yellow'>%s</span>. Pentru <span style='color:green'>%s$</span>. Acum ai balanta egala cu <span style='color:red'>%s$</span>!",vehic,amount,formatMoney(userBalance))})
 		inchiriat = true
 		print(inchiriat)
 		TriggerClientEvent("drent:spawneazaundexo", player, dexoveh)
 	end
 
-	if adabaniludexo(amount, dexoveh) then
-		print(inchiriat)
+	function checkbani(amount)
+		if userBalance < amount then 
+			print("1")
+			TriggerClientEvent('dexospuneacestmesaj:pines', player)
+		else
+			adabaniludexo(amount, dexoveh)
+		end
 	end
 
+	checkbani(amount)
 	print(user_id, amount, dexoveh)
 end)

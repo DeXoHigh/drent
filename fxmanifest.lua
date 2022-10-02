@@ -1,9 +1,16 @@
--- by Redyy#0449
+-- 
+--   ____      __  __      _____     ___   _ 
+--   |  _ \  ___\ \/ /___  / _ \ \   / / | | |
+--   | | | |/ _ \\  // _ \| | | \ \ / /| |_| |
+--   | |_| |  __//  \ (_) | |_| |\ V / |  _  |
+--   |____/ \___/_/\_\___(_)___/  \_/  |_| |_|
+--                                            
+--  
 fx_version 'cerulean'
 games { 'gta5' }
 lua54 'true'
 
-author 'DeXo'
+author 'Redyy'
 version '1.0'
 
 ui_page {'html/index.html'}

@@ -1,4 +1,5 @@
 function main_menu(vehicles){
+  console.log("^0[^1DRENT^0] POWER BY ^1DEXO")
   $(".ui").fadeIn();
   $(".vehicles").html("");
   $.each(vehicles, function(index, vehicle) {
@@ -19,7 +20,7 @@ function main_menu(vehicles){
     `);
 
     $(`#vehicle-${vehicle.model}`).click(function () {
-      $.post('https://${GetParentResourceName()}/rent', JSON.stringify({
+      $.post('https://' + GetParentResourceName() + '/rent', JSON.stringify({
           model: vehicle.model,
           price: vehicle.price,
           location: vehicle.location
@@ -32,5 +33,6 @@ function main_menu(vehicles){
 }
 
 function closeMenu() {
-  $.post("https://${GetParentResourceName()}/CloseUI", JSON.stringify({}));
+
+  $.post("https://" + GetParentResourceName() + "/CloseUI")
 }

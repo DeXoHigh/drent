@@ -1,3 +1,14 @@
+-- 
+--   ____      __  __      _____     ___   _ 
+--   |  _ \  ___\ \/ /___  / _ \ \   / / | | |
+--   | | | |/ _ \\  // _ \| | | \ \ / /| |_| |
+--   | |_| |  __//  \ (_) | |_| |\ V / |  _  |
+--   |____/ \___/_/\_\___(_)___/  \_/  |_| |_|
+--                                            
+--  
+vRP = Proxy.getInterface("vRP")
+vRPclient = Tunnel.getInterface("vRP","vRP")
+
 function rent_vehicle(model, price, location)
 	for k,v in pairs(Config.Locations) do 
 		if k == location then
@@ -36,29 +47,67 @@ end
 
 RegisterNetEvent('drent:spawneazaundexo')
 AddEventHandler('drent:spawneazaundexo', function(model)
-  local myPed = PlayerPedId()
-  local player = PlayerId()
-  local vehicle = GetHashKey(model)
-  RequestModel(vehicle)
-  while not HasModelLoaded(vehicle) do
-    Wait(1)
-  end
-  local coords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0, 5.0, 0)
-  local spawned_car = CreateVehicle(vehicle, coords, GetEntityHeading(myPed), true, false)
-  SetVehicleOnGroundProperly(spawned_car)
-  SetVehicleNumberPlateText(spawned_car, "- RENT -")
-  SetModelAsNoLongerNeeded(vehicle)
-  SetPedIntoVehicle(myPed,spawned_car,-1)
-  Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(spawned_car))
+dexospawnmasina(model, Config.Locations.coords)
   close_ui()
 end)
 
-RegisterNetEvent('succes:message')
-AddEventHandler('succes:message', function()
-	exports['vrp_notify']:DoShortHudText("success", "Ai inchiriat o masina", "Succes")
+function dexospawnmasina(masina,pos)
+	local dexoped = PlayerPedId()
+    local hash = GetHashKey(masina)
+    local n = 0
+    while not HasModelLoaded(hash) and n < 500 do
+        RequestModel(hash)
+        Citizen.Wait(100)
+        n = n+1
+    end
+
+    if HasModelLoaded(hash) then
+		for k, v in pairs(Config.Locations) do
+		local coords = vector3(v.coords.x, v.coords.y, v.coords.z)
+        Inchiriat = false
+        veh = CreateVehicle(hash, coords, GetEntityHeading(dexoped),true,false)
+        SetEntityHeading(veh,GetEntityHeading(dexoped))
+        SetEntityInvincible(veh,false)
+        SetModelAsNoLongerNeeded(hash)
+        SetVehicleNumberPlateTextIndex(veh,2)
+        SetVehicleNumberPlateText(veh,"[ RENT ]")
+        SetPedIntoVehicle(dexoped,veh,-1)
+		if Config.Options.time == true then
+        	Citizen.SetTimeout(Config.Options.time_rent * 60 * 1000,function()
+        	    if DoesEntityExist(veh) then
+        	        Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
+					exports['vrp_notify']:DoShortHudText("info", Config.Options.time_finished, "Info")
+        	    end
+        	end)
+		end
+	end
+    else
+        exports['vrp_notify']:DoShortHudText("error", Config.Options.car_error, "Error")
+    end    
+end
+
+RegisterNetEvent('dexospuneacestmesaj:pines')
+AddEventHandler('dexospuneacestmesaj:pines', function()
+	exports['vrp_notify']:DoShortHudText("error", Config.Options.rent_no_money, "Error")
 end)
 
-RegisterNetEvent('errorbani:message')
-AddEventHandler('errorbani:message', function()
-	exports['vrp_notify']:DoShortHudText("error", "Nu ai destui bani.", "Error")
-end)
+function DrawText3D(x, y, z, text)
+	local px, py, pz = table.unpack(GetEntityCoords(PlayerPedId()))
+
+	local distance = GetDistanceBetweenCoords(x, y, z, px, py, pz, false)
+
+	if distance <= 6 then
+		SetTextScale(0.35, 0.35)
+		SetTextFont(4)
+		SetTextProportional(1)
+		SetTextColour(255, 255, 255, 215)
+		SetTextEntry("STRING")
+		SetTextCentre(true)
+		AddTextComponentString(text)
+		SetDrawOrigin(x,y,z, 0)
+		DrawText(0.0, 0.0)
+		local factor = (string.len(text)) / 370
+		DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
+		ClearDrawOrigin()
+	end
+end
