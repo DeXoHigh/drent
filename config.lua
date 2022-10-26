@@ -79,5 +79,4 @@ Config.Vehicles = {
     --     price = 1000, -- Price.
     --     type = 'CARTYPE' -- Type of vehicle. ( car, bike, bicycle )
     -- },
-
 }
