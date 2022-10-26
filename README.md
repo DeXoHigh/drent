@@ -1,4 +1,4 @@
-## VRP - DRENT
+## VRP - DRENT ![alt text](https://img.shields.io/github/issues/DeXoHigh/drent)
 - Preview: https://streamable.com/kr8ne9
 - More scripts soon...
 
