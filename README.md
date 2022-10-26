@@ -1,4 +1,5 @@
-## VRP - DRENT ![alt text](https://img.shields.io/github/issues/DeXoHigh/drent)
+## VRP - DRENT ![alt text](https://img.shields.io/github/issues/DeXoHigh/drent) ![alt text](https://img.shields.io/github/forks/DeXoHigh/drent) ![alt text](https://img.shields.io/github/stars/DeXoHigh/drent) ![alt text](https://img.shields.io/github/license/DeXoHigh/drent)
+
 - Preview: https://streamable.com/kr8ne9
 - More scripts soon...
 
